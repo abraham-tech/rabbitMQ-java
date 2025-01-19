@@ -1,4 +1,4 @@
-package net.javaguides.orderservice.config;
+package net.javaguides.stockservice.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,33 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    @Value("${rabbitmq.queue.order.name}")
-    private String queueName;
 
-    @Value("${rabbitmq.exchange.name}")
-    private String exchangeName;
-
-    @Value("${rabbitmq.binding.routing.key}")
-    private String routingKey;
-
-    // spring bean for queue - order queue
-    @Bean
-    public Queue orderQueue() {
-        return new Queue(queueName);
-    }
-    // spring bean for exchange
-    @Bean
-    public TopicExchange orderExchange() {
-        return new TopicExchange(exchangeName);
-    }
-    // spring bean for binding between exchange and queue using routing key
-    @Bean
-    public Binding orderBinding() {
-        return BindingBuilder
-                .bind(orderQueue())
-                .to(orderExchange())
-                .with(routingKey);
-    }
     // Configure Jackson2JsonMessageConverter
     @Bean
     public MessageConverter messageConverter() {

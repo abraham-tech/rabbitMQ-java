@@ -1,6 +1,7 @@
-package net.javaguides.orderservice.dto;
+package net.javaguides.stockservice.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
