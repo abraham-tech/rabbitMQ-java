@@ -14,17 +14,29 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queue.order.name}")
     private String queueName;
 
+    @Value("${rabbitmq.queue.email.name}")
+    private String emailQueueName;
+
     @Value("${rabbitmq.exchange.name}")
     private String exchangeName;
 
     @Value("${rabbitmq.binding.routing.key}")
     private String routingKey;
 
+    @Value("${rabbitmq.binding.email.routing.key}")
+    private String emailRoutingKey;
+
     // spring bean for queue - order queue
     @Bean
     public Queue orderQueue() {
+        return new Queue(emailQueueName);
+    }
+
+    @Bean
+    public Queue emailQueue() {
         return new Queue(queueName);
     }
+
     // spring bean for exchange
     @Bean
     public TopicExchange orderExchange() {
@@ -38,6 +50,15 @@ public class RabbitMQConfig {
                 .to(orderExchange())
                 .with(routingKey);
     }
+
+    @Bean
+    public Binding emailBinding() {
+        return BindingBuilder
+                .bind(emailQueue())
+                .to(orderExchange())
+                .with(emailRoutingKey);
+    }
+
     // Configure Jackson2JsonMessageConverter
     @Bean
     public MessageConverter messageConverter() {
