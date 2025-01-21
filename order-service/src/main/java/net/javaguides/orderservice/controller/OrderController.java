@@ -31,5 +31,17 @@ public class OrderController {
         return "Order sent";
     }
 
+    @PostMapping("/emails")
+    public String sendEmail(@RequestBody Order order) {
+//        order.setOrderId(UUID.randomUUID().toString());
+        OrderEvent orderEvent = new OrderEvent();
+        orderEvent.setOrder(order);
+        orderEvent.setMessage("Order sent");
+        orderEvent.setStatus("PENDING");
+
+        orderProducer.sendEmail(order);
+        return "Order sent";
+    }
+
 
 }

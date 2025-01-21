@@ -29,12 +29,12 @@ public class RabbitMQConfig {
     // spring bean for queue - order queue
     @Bean
     public Queue orderQueue() {
-        return new Queue(emailQueueName);
+        return new Queue(queueName);
     }
 
     @Bean
     public Queue emailQueue() {
-        return new Queue(queueName);
+        return new Queue(emailQueueName);
     }
 
     // spring bean for exchange
