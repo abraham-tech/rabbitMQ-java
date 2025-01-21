@@ -1,1 +1,1 @@
-# rabbitMQ-java
+# rabbitMQ-java messageing
